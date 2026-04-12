@@ -8,3 +8,4 @@ const connectDB = async()=>{
         process.exit(1); //exit with failure
     }
 }
+module.exports = connectDB;

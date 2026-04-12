@@ -21,7 +21,7 @@ app.use(morgan("dev"));
 
 //rate limiting
 const limiter = rateLimit({
-    windowMS: 15*60*1000, //15 mins
+    windowMs: 15*60*1000, //15 mins
     max:100, //max 100 requests per 15 min per IP
 })
 app.use(limiter);
