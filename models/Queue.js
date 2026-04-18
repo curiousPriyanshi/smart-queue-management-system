@@ -1,6 +1,6 @@
-const mongoose = require('mngoose');
+const mongoose = require('mongoose');
 
-const queueSchema = new mmongoose.Schema({
+const queueSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
