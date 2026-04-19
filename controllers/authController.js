@@ -11,15 +11,15 @@ const generateToken = (userId, role) => {
 
 const register = async (req, res) => {
     try {
-        const { phone, password, role } = req.body;
+        const { name, phone, password, role } = req.body;
         const existingUser = await User.findOne({ phone });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
         const hashedPassword = await bcrypt.hash(password, 10);//bcrypt.hash(password, saltRounds)
         const count = await User.countDocuments();
-        const customerID = `${role === 'customer' ? 'CUST' : role === 'admin' ? "ADMN" : "SUPR"}-${String(count + 1).padStart(4, '0')}`;
-        const newUser = new User({ phone, password: hashedPassword, role, customerID });
+        const customerID = `${role === 'customer' ? 'CUST' : role === 'counterAdmin' ? "ADMN" : "SUPR"}-${String(count + 1).padStart(4, '0')}`;
+        const newUser = new User({ name, phone, password: hashedPassword, role, customerID });
         await newUser.save();
         res.status(201).json({
             success: true,

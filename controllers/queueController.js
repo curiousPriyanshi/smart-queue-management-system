@@ -25,20 +25,19 @@ const updateQueue = async(req, res)=>{
     }
 }
 
-const deactivateQueue = async(req, res)=>{
+const deleteQueue = async(req, res)=>{
     try{
         const {id} = req.params;
-        const queue = await Queue.findById(id);
+        const queue = await Queue.findByIdAndDelete(id);
         if(!queue){
             return res.status(404).json({ success: false, message: "Queue not found" });
         }
-        queue.isActive = false;
-        await queue.save();
-        res.status(200).json({ success: true, message: "Queue deactivated successfully" });
+        res.status(200).json({ success: true, message: "Queue deleted successfully" });
     }catch(err){
          res.status(500).json({success:false, message:"Server error"});
     }
 }
+
 const getAllQueues = async(req, res)=>{
     try{
         const queues = await Queue.find();
@@ -86,4 +85,4 @@ const toggleQueueStatus = async(req, res)=>{
         res.status(500).json({success:false, message:"Server error"});
     }
 }
-module.exports = { createQueue, updateQueue, toggleQueueStatus, deactivateQueue, getAllQueues, getQueue, getQueueTokens };
+module.exports = { createQueue, updateQueue, toggleQueueStatus, getAllQueues, getQueue, getQueueTokens, deleteQueue };

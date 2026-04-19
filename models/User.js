@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
     phone:{
         type:String,
         required:true,
@@ -13,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     },
     role:{
         type:String,
-        enum:['customer', 'admin', 'superadmin'],
+        enum:['customer', 'counterAdmin', 'superadmin'],
         default:'customer'
     },
     customerID:{
