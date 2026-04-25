@@ -6,7 +6,7 @@ const tokenSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['waiting', 'serving', 'completed', 'expired'],
+        enum: ['waiting', 'away', 'serving', 'completed', 'missed', 'expired', 'cancelled'],
         default: 'waiting',
         required: true
     },
@@ -20,16 +20,11 @@ const tokenSchema = new mongoose.Schema({
         ref: 'Queue',
         required: true
     },
-    expectedWaitTime: {
-        type: Number, //in minutes
-    },
-    positionInQueue: {
-        type: Number,
-    },
     rejoinWindowExpiresAt: {
         type: Date,
-        required: true
-    }
+    },
+    calledAt: { type: Date },
+    completedAt: { type: Date }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Token', tokenSchema);

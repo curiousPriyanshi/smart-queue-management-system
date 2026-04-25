@@ -32,8 +32,8 @@ app.use(express.json());
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/queue", queueRoutes);
-app.use("/api/token", tokenRoutes);
 app.use("/api/counter", counterRoutes);
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api", tokenRoutes);
 
 module.exports = app;
