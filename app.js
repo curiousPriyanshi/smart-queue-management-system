@@ -9,6 +9,9 @@ const queueRoutes = require("./routes/queueRoutes");
 const counterRoutes = require("./routes/counterRoutes");
 const tokenRoutes = require("./routes/tokenRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+
 
 const app = express();
 
@@ -30,6 +33,8 @@ app.use(limiter);
 app.use(express.json());
 
 // routes
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/auth", authRoutes);
 app.use("/api/queue", queueRoutes);
 app.use("/api/counter", counterRoutes);
